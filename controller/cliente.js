@@ -1,5 +1,5 @@
 const Cliente = require('../models/cliente');
-const { request, response } = require('express');
+const { request, response, json } = require('express');
 
 const getClientes = async (req = request,
     res = response) => {
@@ -71,8 +71,7 @@ const updateClienteById = async (req = request, res = response) => {
                 msg: 'el id es obligatorio'
             })
         }
-        
-        
+
         const cliente = await Cliente.findByIdAndUpdate(id, data, { new: true }) //new:true devuelve el registro actualizado
         return res.json({
             msg: 'Cliente actualizado',
@@ -87,8 +86,40 @@ const updateClienteById = async (req = request, res = response) => {
     }
 }
 
+const deleteCliente = async (req = request, res = response) => {
+    try {
+        const id = req.body.id
+
+        if (!id) {
+            return res.status(400).json({
+                msg: 'El id es obligatorio'
+            })
+        }
+
+        if (!Cliente.findById(id)) {
+            return res.status(404).json({
+                msg: 'Cliente no encontrado'
+            })
+        }
+
+        const cliente = await Cliente.findByIdAndDelete(id)
+        return res.json({
+            msg: `Cliente ${cliente.nombre} eliminado`
+        })
+
+
+
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            msg: 'Error en el servidor' + e
+        })
+    }
+}
+
 module.exports = {
     crearCliente,
     getClientes,
-    updateClienteById
+    updateClienteById,
+    deleteCliente
 }
