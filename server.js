@@ -1,5 +1,4 @@
-const app = require('express')()
-const express = require('express')
+const app = require('./app')
 const { mongoConnection } = require('./database/configuration');
 const dotenv = require('dotenv').config();
 

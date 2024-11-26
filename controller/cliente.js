@@ -41,11 +41,11 @@ const crearCliente = async (req = request, res = response) => {
 const getClientes = async (req = request,
     res = response) => {
     try {
-        const clientesBD = await Cliente.find()//obtener todos los clientes
-        return res.json(clientesBD)
+        const clientesDB = await Cliente.find()//select * from tipoEquipo where estado=?
+        return res.json(clientesDB)
     } catch (e) {
         return res.status(500).json({
-            msg: 'Error en el servidor' + e
+            msg: 'Error general ' + e
         })
     }
 }
