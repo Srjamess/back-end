@@ -8,3 +8,10 @@ app.use(express.urlencoded({extended: false}))
 app.use(cors({
     origin: '*'
 }))
+
+const cliente = require('./routes/cliente')
+
+// routes
+app.use('/api/clientes', cliente)
+
+module.exports = app

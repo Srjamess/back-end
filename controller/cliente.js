@@ -37,4 +37,21 @@ const crearCliente = async (req = request, res = response) => {
         })
     }
 }
-module.exports = {crearCliente}
+
+const getClientes = async (req = request,
+    res = response) => {
+    try {
+        const clientesBD = await Cliente.find()//obtener todos los clientes
+        return res.json(clientesBD)
+    } catch (e) {
+        return res.status(500).json({
+            msg: 'Error en el servidor' + e
+        })
+    }
+}
+
+
+module.exports = {
+    crearCliente,
+    getClientes
+}
