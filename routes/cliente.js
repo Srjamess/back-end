@@ -1,5 +1,8 @@
 const { Router } = require('express')
-const { getClientes, crearCliente } = require('../controller/cliente')
+const {
+    getClientes,
+    crearCliente,
+    updateClienteById } = require('../controller/cliente')
 
 const router = Router()
 
@@ -8,6 +11,8 @@ router.get('/', getClientes)
 
 // crear
 router.post('/', crearCliente)
-    
+
+router.put('/:id', updateClienteById)
+
 
 module.exports = router

@@ -19,8 +19,8 @@ const crearCliente = async (req = request, res = response) => {
         const nombre = req.body.nombre ? req.body.nombre.toUpperCase() : ''
         const email = req.body.email
 
-         // Validar que el nombre y el email estén presentes
-         if (!nombre || !email) {
+        // Validar que el nombre y el email estén presentes
+        if (!nombre || !email) {
             return res.status(400).json({
                 msg: 'El nombre y el email son obligatorios',
             });
@@ -52,16 +52,43 @@ const crearCliente = async (req = request, res = response) => {
     } catch (e) {
         console.log(e)
         return res.status(500).json({
-            msg: 'Error en el servidor' + 
-                e
+            msg: 'Error en el servidor' + e
         })
     }
 }
 
+const updateClienteById = async (req = request, res = response) => {
+    try {
+        //obtener el id del cliente
+        const id = req.body.id
+        //obtener el nombre y email del cliente
+        const data = req.body
+        data.nombre = data.nombre ? data.nombre.toUpperCase() : ''
+        data.fechaActualizacion = Date.now()
+        // Validar que el nombre y el email estén presentes
+        if (!id) {
+            return res.status(400).json({
+                msg: 'el id es obligatorio'
+            })
+        }
+        
+        
+        const cliente = await Cliente.findByIdAndUpdate(id, data, { new: true }) //new:true devuelve el registro actualizado
+        return res.json({
+            msg: 'Cliente actualizado',
+            cliente
+        })
 
-
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            msg: 'Error en el servidor' + e
+        })
+    }
+}
 
 module.exports = {
     crearCliente,
-    getClientes
+    getClientes,
+    updateClienteById
 }
