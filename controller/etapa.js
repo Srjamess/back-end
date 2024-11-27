@@ -58,12 +58,50 @@ const crearEtapa = async (req = request, res = response) => {
         console.log(newEtapa);
 
         await newEtapa.save();
-        return res.json(201).json(newEtapa);
-    }catch (e) {
+        return res.json(201).json({
+            msg: 'Etapa creada',
+            etapa: newEtapa
+        });
+
+
+    } catch (e) {
         return res.status(500).json({
             msg: 'Error general' + e
         })
     }
 }
 
-module.exports = { getEtapas, crearEtapa }
+const updateEtapaBYId = async (req = request, res = response) => {
+    try {
+        //obtener el id de la etapa
+        const id = req.body.id
+        //obtener el nombre de la etapa
+        const data = req.body
+        data.nombre = data.nombre ? data.nombre.toUpperCase() : ''
+        data.fechaActualizacion = Date.now()
+
+        //validar que el id de la etapa esté presente
+        if (!id) {
+            return res.status(400), json({
+                msg: 'el id de la etapa es obligatorio'
+            })
+        }
+
+        //actualizar la etapa en la base de datos
+        const etapaActualizada = await Etapa.findByIdAndUpdate(id, data, { new: true })
+        return res.json({
+            msg: 'Etapa actualizada',
+            etapa: etapaActualizada
+        })
+    } catch (e) {
+        return res, status(500), json({
+            msg: 'Error general' + e
+        })
+    }
+}
+
+module.exports = {
+    getEtapas,
+    crearEtapa,
+    updateEtapaBYId
+}
