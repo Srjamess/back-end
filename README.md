@@ -10,3 +10,6 @@ npm install
 
 ## Ejecutar el proyecto
 node server
+
+# subir a Docker
+docker-compose buil
