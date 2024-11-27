@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose');
 
 const etapaSchema = Schema({
-    nombre:{
+    nombre: {
         type: String,
-        required:[true, 'El nombre es obligatorio']
+        required: [true, 'El nombre es obligatorio']
     },
-    fechaCreacion:{
+    fechaCreacion: {
         type: Date,
         default: Date.now()
     },
-    fechaActualizacion:{
+    fechaActualizacion: {
         type: Date,
         default: Date.now()
     }

@@ -80,7 +80,7 @@ const updateEtapaBYId = async (req = request, res = response) => {
         //validar que el id de la etapa esté presente
         if (!id) {
             return res.status(400), json({
-                msg: 'el id de la etapa es obligatorio'
+                msg: 'el id y el nombre de la etapa es obligatorio'
             })
         }
 
@@ -91,7 +91,7 @@ const updateEtapaBYId = async (req = request, res = response) => {
             etapa: etapaActualizada
         })
     } catch (e) {
-        return res, status(500), json({
+        return res.status(500), json({
             msg: 'Error general' + e
         })
     }
