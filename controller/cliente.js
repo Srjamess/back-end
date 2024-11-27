@@ -44,6 +44,7 @@ const crearCliente = async (req = request, res = response) => {
 
         //guardar el cliente en la base de datos
         const clienteNuevo = new Cliente(cliente)
+        console.log(clienteNuevo)
         await clienteNuevo.save()
         return res.status(201).json({
             msg: `El cliente ${nombre} fue creado`,
