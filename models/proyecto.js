@@ -1,35 +1,40 @@
-const {Shema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 const tipoProyecto = require('./tipoProyecto');
 const etapa = require('./etapa');
+const cliente = require('./cliente');
 
-const proyectoShema = Shema({
-    numero:{
+const proyectoSchema = Schema({
+    numero: {
         type: String,
-        requiered: [true, 'El numero es obligatorio']
+        required: [true, 'El numero es obligatorio']
     },
-    titulo:{
+    titulo: {
         type: String,
-        requiered: [true, 'El titulo es oblogatorio']
+        required: [true, 'El titulo es obligatorio']
     },
-    tipoProyecto:{
+    fechaIniciacion: {
+        type: Date,
+        required: [true, 'La fecha de iniciacion es obligatoria']
+    },
+    tipoProyecto: {
         type: Schema.Types.ObjectId,
         ref: 'tipoProyecto',
-        requiered: [true, 'El tipo de proyecto es obligatorio']
+        required: [true, 'El tipo de proyecto es obligatorio']
     },
-    cliente:{
+    cliente: {
         type: Schema.Types.ObjectId,
         ref: 'cliente',
-        requiered: [true, 'El cliente es obligatorio']
+        required: [true, 'El cliente es obligatorio']
     },
-    universidad:{
+    universidad: {
         type: Schema.Types.ObjectId,
         ref: 'universidad',
-        requiered: [true, 'La universidad es obligatoria']
+        required: [true, 'La universidad es obligatoria']
     },
-    etapa:{
+    etapa: {
         type: Schema.Types.ObjectId,
         ref: 'etapa',
-        requiered: [true, 'La etapa es obligatoria']
+        required: [true, 'La etapa es obligatoria']
     },
     fechaCreacion:{
         type: Date,
@@ -40,5 +45,4 @@ const proyectoShema = Shema({
         default: Date.now()
     }
 })
-
-model.exports = model('proyecto', proyectoShema);
+module.exports = model('proyecto', proyectoSchema);

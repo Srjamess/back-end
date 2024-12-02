@@ -11,9 +11,13 @@ app.use(cors({
 
 const cliente = require('./routes/cliente')
 const etapa = require('./routes/etapa')
+const proyecto = require('./routes/proyecto')
+const tipoProyecto =require('./routes/tipoProyectos')
 
 // routes
 app.use('/api/clientes', cliente)
 app.use('/api/etapas', etapa)
+app.use('/api/proyectos', proyecto)
+app.use('/api/tipoProyectos', tipoProyecto)
 
 module.exports = app
