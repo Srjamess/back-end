@@ -16,6 +16,9 @@ const proyectoSchema = Schema({
         type: Date,
         required: [true, 'La fecha de iniciacion es obligatoria']
     },
+    fechaFinalizacion: {
+        type: Date,
+    },
     tipoProyecto: {
         type: Schema.Types.ObjectId,
         ref: 'tipoProyecto',
@@ -36,11 +39,11 @@ const proyectoSchema = Schema({
         ref: 'etapa',
         required: [true, 'La etapa es obligatoria']
     },
-    fechaCreacion:{
+    fechaCreacion: {
         type: Date,
         default: Date.now()
     },
-    fechaActualizacion:{
+    fechaActualizacion: {
         type: Date,
         default: Date.now()
     }

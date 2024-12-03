@@ -7,8 +7,9 @@ const Cliente = require('../models/cliente');
 const getProyectos = async (req = request, res = response) => {
     try {
         const proyectosDB = await Proyecto.find()
+
             .populate('tipoProyecto')
-            .populate('cliente')
+            .populate('cliente', 'nombre')
             .populate('etapa')
             .populate('universidad');
 
