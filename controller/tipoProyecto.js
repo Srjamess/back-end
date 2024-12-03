@@ -3,7 +3,7 @@ const { request, response, json } = require('express');
 
 const getTipoProyectos = async (req = request, res = response) => {
     try {
-        const tipoProyectosDB = await tipoProyecto.find();
+        const tipoProyectosDB = await TipoProyecto.find();
         return res.json(tipoProyectosDB)
     } catch (e) {
         return res.status(500).json({
