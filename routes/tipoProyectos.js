@@ -1,8 +1,9 @@
 const { Router } = require('express')
-const { getTipoProyectos } = require('../controller/tipoProyecto')
+const { getTipoProyectos, createTipoProyecto } = require('../controller/tipoProyecto')
 
 const router =Router()
 
 router.get('/', getTipoProyectos)
+router.post('/', createTipoProyecto)
 
 module.exports = router
