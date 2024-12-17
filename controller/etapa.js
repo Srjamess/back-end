@@ -97,8 +97,39 @@ const updateEtapaBYId = async (req = request, res = response) => {
     }
 }
 
+const deleteEtapa = async (req = request, res = response) => {
+    try {
+        //obtener el id de la etapa
+        const id = req.body.id
+
+        if (!id) {
+            return res.status(400).json({
+                msg: 'El id es obligatorio'
+            })
+        }
+
+        //eliminar la etapa de la base de datos
+        if (!Etapa.findById(id)) {
+            return res.status(404).json({
+                msg: 'La etapa no existe'
+            })
+
+        }
+        const etapa = await Etapa.findByIdAndDelete(id)
+        return res.json({
+            msg: `Etapa  ${etapa.nombre} eliminada`
+        })
+
+    } catch (e) {
+        return res.status(500).json({
+            msg: 'Error general' + e
+        })
+    }
+}
+
 module.exports = {
     getEtapas,
     crearEtapa,
-    updateEtapaBYId
+    updateEtapaBYId,
+    deleteEtapa
 }
