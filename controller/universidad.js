@@ -46,7 +46,9 @@ const createUniversidad = async (req = request, res = response) => {
         //guardar la universidad en la base de datos
         const universidadNueva = new Universidad(universidad)
         console.log(universidadNueva)
+
         await universidadNueva.save()
+
         return res.status(201).json({
             msg: `la universidad ${nombre} fue creada con exito.`,
             universidad: universidadNueva
@@ -55,6 +57,35 @@ const createUniversidad = async (req = request, res = response) => {
         console.log(e)
         return res.status(500), json({
             msg: 'error en el servidor ' + e
+        })
+    }
+}
+
+const updateUniversidadById =  async(req =request, res = response) => {
+    try {
+        //obtener el id de la universidad
+        const id = req.body.id
+        //obtener el nombre de la universidad
+        const data = req.body.nombre ? req.body.nombre.toUpperCase() : ''
+        data.direccion = req.body.direccion
+        data.telefono = req.body.telefono
+        fechaActualizacion = Date.now()
+
+        //validar que el id de la universidad esté presente
+        if (!id) {
+            return res.status(400).json({
+                msg: 'El id y el nombre de la universidad son obligatorios.'
+            })
+        }
+
+        const Universidad = await Universidad.findByIdAndUpdate(id, data, {new : true} )
+        return res.json({
+            msg: `Universidad ${nombre} actualizada con exito.`,
+            universidad: Universidad
+        });
+    }catch (e) {
+        return res.status(500).json({
+            msg: 'Error general ' + e ,
         })
     }
 }
