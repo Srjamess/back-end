@@ -1,7 +1,7 @@
 const Cliente = require("../models/cliente");
 const { request, response, json } = require("express");
 
-const getClientes = async (req = request, res = response) => {
+const   getClientes = async (req = request, res = response) => {
   try {
     const clientesDB = await Cliente.find(); //select * from tipoEquipo where estado=?
     return res.json(clientesDB);
